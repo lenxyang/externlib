@@ -1,18 +1,33 @@
 
 
-config("SDL-1.2") {
-  include_dirs = ["SDL-1.2.15/include/"]
-  libs = ["SDL-1.2.15/lib/x86/SDL.lib"]
-}
-
-config("SDL-2") {
+config("SDL-1.2-config") {
   include_dirs = [
-    "SDL-2.0.3/include/",
-    "SDL2_image-2.0.0/include/"
+    "SDL-1.2.15/include/",
+    "SDL_image-1.2.12/include",
   ]
   libs = [
-    "SDL-2.0.3/lib/x86/SDL.lib"
-    "SDL2_image-2.0.0/lib/x86/SDL2_image.lib"
+    rebase_path("SDL-1.2.15/lib/x86/SDL.lib", root_build_dir),
+    rebase_path("SDL_image-1.2.12/lib/x86/SDL_image.lib", root_build_dir),
   ]
 }
 
+config("SDL-2-config") {
+  include_dirs = [
+    "SDL2-2.0.3/include/",
+    "SDL2_image-2.0.0/include/",
+  ]
+  libs = [
+    rebase_path("SDL-2.0.3/lib/x86/SDL.lib", root_build_dir),
+    rebase_path("SDL2_image-2.0.0/lib/x86/SDL2_image.lib", root_build_dir),
+  ]
+}
+
+static_library("SDL-1.2") {
+  sources = ["dummy.cc"]
+  public_configs = [":SDL-1.2-config"]
+}
+
+static_library("SDL-2") {
+  sources = ["dummy.cc"]
+  public_configs = [":SDL-2-config"]
+}
