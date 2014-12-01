@@ -1,0 +1,18 @@
+
+
+config("SDL-1.2") {
+  include_dirs = ["SDL-1.2.15/include/"]
+  libs = ["SDL-1.2.15/lib/x86/SDL.lib"]
+}
+
+config("SDL-2") {
+  include_dirs = [
+    "SDL-2.0.3/include/",
+    "SDL2_image-2.0.0/include/"
+  ]
+  libs = [
+    "SDL-2.0.3/lib/x86/SDL.lib"
+    "SDL2_image-2.0.0/lib/x86/SDL2_image.lib"
+  ]
+}
+
